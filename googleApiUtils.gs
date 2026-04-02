@@ -256,3 +256,23 @@ function findRowByColumnValue(sheet, columnIndex, targetValue, startRow) {
 
   return 0;
 }
+
+/**
+ * Drive フォルダIDが有効かどうかを判定する
+ *
+ * @param {string} folderId
+ * @returns {boolean}
+ */
+function isValidDriveFolderId(folderId) {
+  if (!folderId || String(folderId).trim() === '') {
+    return false;
+  }
+
+  try {
+    const folder = DriveApp.getFolderById(String(folderId).trim());
+    // 取得できた時点で有効
+    return !!folder;
+  } catch (e) {
+    return false;
+  }
+}
